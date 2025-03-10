@@ -24,7 +24,7 @@ public class CofrinhoController {
         return repository;
     }
 
-    // Cadastrar categorias
+    // Criar cofrinho
     @PostMapping("/cofrinhos")
     // @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<Cofrinho> create(@RequestBody Cofrinho cofrinho) {
@@ -33,10 +33,10 @@ public class CofrinhoController {
         return ResponseEntity.status(201).body(cofrinho);
     }
 
-    // Detalhes da categorias
+    // Buscar cofrinho em específico
     @GetMapping("/cofrinhos/{id}")
     public ResponseEntity<Cofrinho> get(@PathVariable Long id) {
-        System.out.println("Buscando categoria " + id);
+        System.out.println("Buscando cofrinho " + id);
         var cofrinho = repository
                 .stream()
                 .filter(c -> c.getId().equals(id))

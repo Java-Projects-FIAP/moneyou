@@ -6,13 +6,15 @@ public class Cofrinho {
     private Long id;
     private Long idOwner;
     private Long balance;
-    private TipoCofrinho tipo;
+    private TipoCofrinho type;
+    private String name;
 
-    public Cofrinho(Long id, Long idOwner, Long balance, TipoCofrinho tipo) {
+    public Cofrinho(Long id, Long idOwner, Long balance, TipoCofrinho type, String name) {
         this.id = id;
         this.idOwner = idOwner;
         this.balance = balance;
-        this.tipo = tipo;
+        this.type = type;
+        this.name = name;
     }
 
     public Long getId() {
@@ -27,8 +29,12 @@ public class Cofrinho {
         return balance;
     }
 
-    public TipoCofrinho getTipo() {
-        return tipo;
+    public TipoCofrinho getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void depositar(Long valor) {
