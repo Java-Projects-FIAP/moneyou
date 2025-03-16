@@ -59,4 +59,10 @@ public class Cofrinho {
         this.balance -= valor;
     }
 
+    @Override
+    public String toString() {
+        return "Cofrinho [id=" + id + ", idOwner=" + idOwner + ", balance=" + balance + ", type=" + type + ", name="
+                + name + "]";
+    }
+
 }
