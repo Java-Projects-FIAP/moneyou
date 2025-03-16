@@ -21,6 +21,10 @@ public class Cofrinho {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getIdOwner() {
         return idOwner;
     }
