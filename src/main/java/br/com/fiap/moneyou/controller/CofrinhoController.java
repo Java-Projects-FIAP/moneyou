@@ -62,6 +62,8 @@ public class CofrinhoController {
     @PutMapping("/cofrinhos/{id}")
     public Cofrinho update(@PathVariable Long id, @RequestBody Cofrinho cofrinho) {
         log.info("Atualizando categoria " + id + " " + cofrinho);
+
+        repository.remove(getCofrinho(id));
         cofrinho.setId(id);
         repository.add(cofrinho);
 
