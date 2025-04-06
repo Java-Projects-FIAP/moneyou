@@ -1,45 +1,22 @@
 package br.com.fiap.moneyou.model;
 
 import br.com.fiap.moneyou.Enum.TipoCofrinho;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
 
+@Entity
+@Data
 public class Cofrinho {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idOwner;
     private Long balance;
     private TipoCofrinho type;
     private String name;
-
-    public Cofrinho(Long id, Long idOwner, Long balance, TipoCofrinho type, String name) {
-        this.id = id;
-        this.idOwner = idOwner;
-        this.balance = balance;
-        this.type = type;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdOwner() {
-        return idOwner;
-    }
-
-    public Long getBalance() {
-        return balance;
-    }
-
-    public TipoCofrinho getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void depositar(Long valor) {
         if (valor > 0) {
@@ -57,12 +34,6 @@ public class Cofrinho {
             throw new IllegalArgumentException("Saldo insuficiente para saque.");
         }
         this.balance -= valor;
-    }
-
-    @Override
-    public String toString() {
-        return "Cofrinho [id=" + id + ", idOwner=" + idOwner + ", balance=" + balance + ", type=" + type + ", name="
-                + name + "]";
     }
 
 }
