@@ -1,5 +1,6 @@
 package br.com.fiap.moneyou.controller;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,9 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
     @GetMapping("verify-email/{email}")
-    public ResponseEntity<String> getUserByEmail(@PathVariable String email) {
+    public Optional<Usuario> getUserByEmail(@PathVariable String email) {
         log.info("Buscando usuário com email " + email);
-        boolean userExists = repository.findByEmail(email).isPresent();
-        if (userExists) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("Já existe uma conta cadastrada com esse e-mail.");
-        }
-        return ResponseEntity
-                .ok("E-mail disponível para cadastro.");
-
+        return repository.findByEmail(email);
     }
 
     @GetMapping("{id}")
