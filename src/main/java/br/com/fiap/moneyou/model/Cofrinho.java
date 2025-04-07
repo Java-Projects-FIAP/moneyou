@@ -15,6 +15,7 @@ public class Cofrinho {
     private Long id;
     private Long idOwner;
     private Long balance;
+    //private double value;
     private TipoCofrinho type;
     private String name;
 
