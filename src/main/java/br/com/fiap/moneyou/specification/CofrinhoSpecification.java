@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.fiap.moneyou.model.Cofrinho;
-import br.com.fiap.moneyou.CofrinnhoFilter;
+import br.com.fiap.moneyou.model.CofrinhoFilter;
 import jakarta.persistence.criteria.Predicate;
 
 public class CofrinhoSpecification {

@@ -1,5 +1,7 @@
 package br.com.fiap.moneyou.model;
 
+import java.time.LocalDate;
+
 import br.com.fiap.moneyou.Enum.TipoCofrinho;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,18 +30,16 @@ public class Cofrinho {
     private Long id;
     private Long idOwner;
 
-
     @PastOrPresent(message = "deve ser no passado")
     private LocalDate date;
 
     @Positive(message = "deve ser positivo")
     private Long balance;
-    
+
     @NotNull(message = "campo obrigatório")
     @Enumerated(EnumType.STRING)
     private TipoCofrinho type;
 
-    
     @NotBlank(message = "campo obrigatório")
     @Size(min = 5, max = 255, message = "O Nome ter pelo menos 5 caracteres")
     private String name;

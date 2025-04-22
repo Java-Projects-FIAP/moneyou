@@ -4,14 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -30,7 +28,7 @@ public class Usuario {
     private String name;
 
     @NotBlank(message = "campo obrigatório")
-    @Size(min = 10 , max = 255, message = "O Email ter pelo menos 10 caracteres")
+    @Size(min = 10, max = 255, message = "O Email ter pelo menos 10 caracteres")
     private String email;
 
     @NotBlank(message = "campo obrigatório")

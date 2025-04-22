@@ -1,14 +1,16 @@
 package br.com.fiap.moneyou.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 
 import br.com.fiap.moneyou.model.Cofrinho;
+import br.com.fiap.moneyou.model.CofrinhoFilter;
 import br.com.fiap.moneyou.repository.CofrinhoRepository;
+import br.com.fiap.moneyou.specification.CofrinhoSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -41,9 +41,8 @@ public class CofrinhoController {
     @GetMapping
     @Cacheable("cofrinhos")
     public Page<Cofrinho> index(
-        CofrinhoFilter filter,
-        @PageableDefault(size = 10, sort = "date", direction = Direction.DESC) Pageable pageable
-    ) {
+            CofrinhoFilter filter,
+            @PageableDefault(size = 10, sort = "date", direction = Direction.DESC) Pageable pageable) {
         var specification = CofrinhoSpecification.withFilters(filter);
         return repository.findAll(specification, pageable);
     }
@@ -60,10 +59,12 @@ public class CofrinhoController {
         return ResponseEntity.status(201).body(cofrinho);
     }
 
-    @GetMapping("{id}")
-    public Cofrinho get(@PathVariable Long id) {
-        log.info("Buscando cofrinho " + id);
-        return getCofrinho(id);
+    @GetMapping("{name}")
+    public Page<Cofrinho> get(
+            @PathVariable String name,
+            Pageable pageable) {
+        log.info("Buscando cofrinho ");
+        return repository.findByNameContainingIgnoringCase(name, pageable);
     }
 
     @DeleteMapping("{id}")
