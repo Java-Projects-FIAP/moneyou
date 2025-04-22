@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 
 import br.com.fiap.moneyou.model.Cofrinho;
 import br.com.fiap.moneyou.repository.CofrinhoRepository;
@@ -36,8 +40,12 @@ public class CofrinhoController {
 
     @GetMapping
     @Cacheable("cofrinhos")
-    public List<Cofrinho> index() {
-        return repository.findAll();
+    public Page<Cofrinho> index(
+        CofrinhoFilter filter,
+        @PageableDefault(size = 10, sort = "date", direction = Direction.DESC) Pageable pageable
+    ) {
+        var specification = CofrinhoSpecification.withFilters(filter);
+        return repository.findAll(specification, pageable);
     }
 
     @PostMapping

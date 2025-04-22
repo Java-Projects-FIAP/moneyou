@@ -27,8 +27,11 @@ public class Cofrinho {
     private Long idOwner;
 
 
+    @PastOrPresent(message = "deve ser no passado")
+    private LocalDate date;
+
+    @Positive(message = "deve ser positivo")
     private Long balance;
-    //private double value;
     
     @NotNull(message = "campo obrigatório")
     @Enumerated(EnumType.STRING)

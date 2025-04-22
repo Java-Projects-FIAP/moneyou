@@ -46,6 +46,7 @@ public class DatabaseSeeder {
             List<Cofrinho> cofrinhos = List.of(
                 Cofrinho.builder()
                     .idOwner(user1.getId())
+                    .date(LocalDate.now().minusDays(1))
                     .balance(1000L)
                     .type(TipoCofrinho.RESGATE_365_DIAS)
                     .name("Viagem ao Japão")
@@ -53,6 +54,7 @@ public class DatabaseSeeder {
 
                 Cofrinho.builder()
                     .idOwner(user2.getId())
+                    .date(LocalDate.now().minusDays(5))
                     .balance(3000L)
                     .type(TipoCofrinho.RESGATE_IMEDIATO)
                     .name("Reserva de emergência")
@@ -60,6 +62,7 @@ public class DatabaseSeeder {
 
                 Cofrinho.builder()
                     .idOwner(user1.getId())
+                    .date(LocalDate.now().minusDays(10))
                     .balance(500L)
                     .type(TipoCofrinho.RESGATE_365_DIAS)
                     .name("Presente de aniversário")
